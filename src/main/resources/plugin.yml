@@ -1,0 +1,12 @@
+name: FlameCore
+version: '1.0.3'
+main: dream.soulflame.flamecore.FlameCore
+authors: [ SoulFlame ]
+depend:
+  - PlaceholderAPI
+  - PlayerPoints
+  - Vault
+commands:
+  flamecore:
+    aliases:
+      - fc

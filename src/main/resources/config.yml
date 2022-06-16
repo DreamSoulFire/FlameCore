@@ -1,0 +1,66 @@
+#设置所有 Flame 系列插件的前缀
+Prefix: '&7[&b系统&7]'
+
+#禁止摔落伤害
+AntiFalling:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#禁止生物燃烧
+AntiFire:
+  Enable: true
+  #两种检测
+  # name 检测生物名称[包含即可]
+  # entity 检测原版生物名
+  List:
+    - 'name<->超级boss'
+    - 'entity<->ZOMBIE'
+  #打开后每次攻击生物
+  #将会输出对应的原版生物名
+  Debug: false
+
+#禁止过快加入服务器
+AntiSpeedJoin:
+  #是否启用 [true 是|false 否]
+  Enable: true
+  #禁止玩家进入服务器的时间
+  AntiTime: 30
+  #提出玩家发送的信息
+  AntiTimeMsg: '&c请等待 <time> 秒后再进入服务器'
+
+#插件关闭时踢出所有玩家
+KickPlayer:
+  Enable: true
+  #发送的信息
+  Msg: '&b服务器&c关闭 &a您已被&6踢出&b服务器'
+
+#支持的消息模式列表
+#[message] 发送私人消息
+#格式 [message]要发送的信息
+#[title] 发送标题
+#格式 [title]主标题-副标题-淡入时间-持续时间-淡出时间
+#[bossbar] 发送boss血条
+#boss血条的颜色
+# BLUE 蓝色 GREEN 绿色 PINK 粉色
+# PURPLE 紫色 RED 红色 WHITE 白色
+# YELLOW 黄色
+#boss血条的样式
+#有 5 种不同的样式
+# SEGMENTED_10 将血条分为10个部分 SEGMENTED_12 将血条分为12个部分
+# SEGMENTED_20 将血条分为20个部分 SEGMENTED_6 将血条分为6个部分
+# SOLID 将血条设置为一个部分
+#格式 [bossbar]标题[文字]-颜色-样式
+#冒号后面跟的是延迟执行的时间 不填默认 0
+# [message]&c你没有权利这么做:30
+#帮助命令
+Help:
+  - '&7| &6Flame&eCore &7| &e插件帮助'
+  - '&f/flamecore help &a插件主命令'
+  - '&f/flamecore reload &a重载插件'
+  - '&4PS&f: &e所有的 &bflamecore &e都可用 &afc &e来代替'
+#没有权限时发送的消息
+NoPermission:
+  - '[message]&c你没有权利这么做'
+#重载插件时发送的消息
+Reload:
+  - '[message]&a插件重载成功'
