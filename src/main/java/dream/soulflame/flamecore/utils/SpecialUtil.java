@@ -120,7 +120,7 @@ public class SpecialUtil {
         if (events.startsWith(eventPrefix)) {
             substring = events.substring(eventPrefix.length());
             if (!substring.contains(":")) {
-                message(sender, prefix + substring, delay);
+                message(sender, prefix + substring);
                 return;
             }
             delaySplit = substring.split(":");

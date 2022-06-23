@@ -1,5 +1,5 @@
 name: FlameCore
-version: '1.0.3'
+version: '1.0.4'
 main: dream.soulflame.flamecore.FlameCore
 authors: [ SoulFlame ]
 depend:
