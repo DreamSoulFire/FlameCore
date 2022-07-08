@@ -3,6 +3,7 @@ package dream.soulflame.flamecore;
 import dream.soulflame.flamecore.commands.MainCommand;
 import dream.soulflame.flamecore.events.AntiFallingDamage;
 import dream.soulflame.flamecore.events.AntiFire;
+import dream.soulflame.flamecore.events.AntiItemAttack;
 import dream.soulflame.flamecore.events.AntiSpeedJoin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -47,6 +48,8 @@ public final class FlameCore extends JavaPlugin {
         };
         for (String load : loadPlugin) getConsoleSender().sendMessage(reColor(load));
 
+        if (getConfig().getBoolean("AntiItemAttack.Enable", false))
+            getPluginManager().registerEvents(new AntiItemAttack(), this);
         if (getConfig().getBoolean("AntiFalling.Enable", false))
             getPluginManager().registerEvents(new AntiFallingDamage(), this);
         if (getConfig().getBoolean("AntiFire.Enable", false))

@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 import static dream.soulflame.flamecore.FlameCore.getPlugin;
-import static dream.soulflame.flamecore.utils.SendUtil.reColor;
 import static dream.soulflame.flamecore.utils.SpecialUtil.actions;
 
 public class MainCommand implements TabExecutor {

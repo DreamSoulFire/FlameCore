@@ -18,12 +18,12 @@ public class AntiFire implements Listener {
             String[] split = antis.split("<->");
             if ("name".equalsIgnoreCase(split[0])) {
                 String name = e.getEntity().getName();
-                if (name.contains(split[1])) e.setCancelled(true);
-            }
-            if ("entity".equalsIgnoreCase(split[0])) {
+                if (!name.contains(split[1])) continue;
+                e.setCancelled(true);
+            } else if ("entity".equalsIgnoreCase(split[0])) {
                 EntityType type = e.getEntityType();
-                if (type.equals(EntityType.valueOf(split[1])))
-                    e.setCancelled(true);
+                if (!type.equals(EntityType.valueOf(split[1]))) continue;
+                e.setCancelled(true);
             }
         }
     }
