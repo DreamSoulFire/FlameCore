@@ -2,12 +2,19 @@ package dream.soulflame.flamecore.utils;
 
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
+
 import static dream.soulflame.flamecore.FlameCore.getPlugin;
 import static dream.soulflame.flamecore.utils.SendUtil.reName;
 import static org.bukkit.Bukkit.*;
 import static org.bukkit.Bukkit.dispatchCommand;
 
 public class CommandUtil {
+
+    public static void commands(CommandSender sender, List<String> commands) {
+        for (String command : commands) commands(sender, command);
+    }
+
     public static void commands(CommandSender sender, String commands) {
 
         int delay = 0;

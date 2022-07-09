@@ -116,6 +116,10 @@ public class SpecialUtil {
         return true;
     }
 
+    public static void actions(CommandSender sender, List<String> events) {
+        for (String event : events) actions(sender, event);
+    }
+
     public static void actions(CommandSender sender, String events) {
         int delay = 0;
         String substring;
