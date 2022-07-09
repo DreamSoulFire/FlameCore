@@ -21,6 +21,9 @@ import static org.bukkit.Bukkit.createBossBar;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class SendUtil {
+    public static void message(CommandSender sender, List<String> texts) {
+        for (String text : texts) sender.sendMessage(reColor(reName(sender, text)));
+    }
     public static void message(CommandSender sender, String text) {
         sender.sendMessage(reColor(reName(sender, text)));
     }

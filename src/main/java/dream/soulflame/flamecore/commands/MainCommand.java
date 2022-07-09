@@ -14,23 +14,23 @@ import static dream.soulflame.flamecore.utils.SpecialUtil.actions;
 public class MainCommand implements TabExecutor {
 
     private void reload(CommandSender sender) {
-        for (String reload : getPlugin().getConfig().getStringList("Reload")) actions(sender, reload);
+        actions(sender, getPlugin().getConfig().getStringList("Reload"));
         getPlugin().reloadConfig();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0 || "help".equalsIgnoreCase(args[0])) {
-            if (sender.hasPermission("flamecore.help")) for (String help : getPlugin().getConfig().getStringList("Help"))
-                SendUtil.message(sender, help);
-            else for (String noPer : getPlugin().getConfig().getStringList("NoPermission")) actions(sender, noPer);
+            if (sender.hasPermission("flamecore.help"))
+                SendUtil.message(sender, getPlugin().getConfig().getStringList("Help"));
+            else actions(sender, getPlugin().getConfig().getStringList("NoPermission"));
             return true;
         }
         if (args.length == 1 && "reload".equalsIgnoreCase(args[0])) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (player.hasPermission("flamecore.reload")) reload(player);
-                else for (String noPer : getPlugin().getConfig().getStringList("NoPermission")) actions(sender, noPer);
+                else actions(sender, getPlugin().getConfig().getStringList("NoPermission"));
             } else reload(sender);
             return true;
         }
