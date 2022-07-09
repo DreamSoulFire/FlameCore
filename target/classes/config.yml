@@ -53,6 +53,8 @@ KickPlayer:
 #格式 [message]要发送的信息
 #[title] 发送标题
 #格式 [title]主标题-副标题-淡入时间-持续时间-淡出时间
+#[actionbar] 发送actionbar
+#格式 [actionbar]要发送的信息
 #[bossbar] 发送boss血条
 #boss血条的颜色
 # BLUE 蓝色 GREEN 绿色 PINK 粉色

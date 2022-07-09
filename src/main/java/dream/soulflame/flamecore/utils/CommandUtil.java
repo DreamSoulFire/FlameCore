@@ -21,7 +21,7 @@ public class CommandUtil {
                 return;
             }
             split = substring.split(":");
-            if (split[1] == null) return;
+            if (split.length < 2) return;
             delay = Integer.parseInt(split[1]);
             opCommand(sender, reName(sender, split[0]), delay);
         }
@@ -33,7 +33,7 @@ public class CommandUtil {
                 return;
             }
             split = substring.split(":");
-            if (split[1] == null) return;
+            if (split.length < 2) return;
             delay = Integer.parseInt(split[1]);
             String[] finalSplit = split;
             getScheduler().runTaskLaterAsynchronously(getPlugin(),
@@ -48,7 +48,7 @@ public class CommandUtil {
                 return;
             }
             split = substring.split(":");
-            if (split[1] == null) return;
+            if (split.length < 2) return;
             delay = Integer.parseInt(split[1]);
             String[] finalSplit = split;
             getScheduler().runTaskLaterAsynchronously(getPlugin(),

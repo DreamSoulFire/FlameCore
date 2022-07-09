@@ -7,10 +7,12 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static dream.soulflame.flamecore.FlameCore.getPlugin;
@@ -18,12 +20,17 @@ import static dream.soulflame.flamecore.utils.SendUtil.*;
 
 public class SpecialUtil {
 
+    public static String version() {
+        String version = Bukkit.getServer().getClass().getPackage().getName();
+        return version.substring(version.lastIndexOf('.') + 1);
+    }
+
     public static boolean takeCurrency(Player player, String take, String splitChar, Plugin plugin, List<String> configError) {
         String money = Currencies.MONEY.getArgs();
         String points = Currencies.POINTS.getArgs();
         String[] split = take.split(splitChar);
         Economy provider = plugin.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
-        if (take.equalsIgnoreCase("")) return true;
+        if ("".equalsIgnoreCase(take)) return true;
         if (take.contains(splitChar)) {
             double amount = Double.parseDouble(split[1]);
             if (take.startsWith(money)) {
@@ -166,6 +173,22 @@ public class SpecialUtil {
             delaySplit = substring.split(":");
             if (delaySplit[1] != null) delay = Integer.parseInt(delaySplit[1]);
             bossbar(sender, split[0], split[1], delaySplit[0], delay);
+        }
+        eventPrefix = "[actionbar]";
+        if (events.startsWith(eventPrefix)) {
+            try {
+                substring = events.substring(eventPrefix.length());
+                if (!substring.contains(":")) {
+                    actionBar(sender, substring, delay);
+                    return;
+                }
+                delaySplit = substring.split(":");
+                if (delaySplit[1] != null) delay = Integer.parseInt(delaySplit[1]);
+                actionBar(sender, delaySplit[0], delay);
+            } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
+                     IllegalAccessException | InstantiationException | NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

@@ -17,10 +17,12 @@ public class AntiFire implements Listener {
         for (String antis : FlameCore.getPlugin().getConfig().getStringList("AntiFire.List")) {
             String[] split = antis.split("<->");
             if ("name".equalsIgnoreCase(split[0])) {
+                if (split.length < 2) continue;
                 String name = e.getEntity().getName();
                 if (!name.contains(split[1])) continue;
                 e.setCancelled(true);
             } else if ("entity".equalsIgnoreCase(split[0])) {
+                if (split.length < 2) continue;
                 EntityType type = e.getEntityType();
                 if (!type.equals(EntityType.valueOf(split[1]))) continue;
                 e.setCancelled(true);

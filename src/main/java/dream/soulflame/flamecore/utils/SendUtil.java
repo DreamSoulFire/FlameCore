@@ -9,6 +9,10 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +47,36 @@ public class SendUtil {
         bossBar.addPlayer(player);
         getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> bossBar.removePlayer(player), delay);
     }
+
+    public static void actionBar(CommandSender sender, String text,int delay) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchFieldException {
+        String version = SpecialUtil.version();
+        Class<?> aClass_Packet = Class.forName("net.minecraft.server." + version + ".Packet");
+        Class<?> aClass_PlayerConnection = Class.forName("net.minecraft.server." + version + ".PlayerConnection");
+        Class<?> aClass_ChatMessageType = Class.forName("net.minecraft.server." + version + ".ChatMessageType");
+        Class<?> aClass_EntityPlayer = Class.forName("net.minecraft.server." + version + ".EntityPlayer");
+        Class<?> aClass_IChatBaseComponent = Class.forName("net.minecraft.server." + version + ".IChatBaseComponent");
+        Class<?> aClass_IChatBaseComponent$ChatSerializer = Class.forName("net.minecraft.server." + version + ".IChatBaseComponent$ChatSerializer");
+        Class<?> aClass_PacketPlayOutChat = Class.forName("net.minecraft.server." + version + ".PacketPlayOutChat");
+        Class<?> aClass_CraftPlayer = Class.forName("org.bukkit.craftbukkit." + version + ".entity.CraftPlayer");
+        Method aMethod_IChatBaseComponent$ChatSerializer_a = aClass_IChatBaseComponent$ChatSerializer.getDeclaredMethod("a", String.class);
+        Object object_msg = aMethod_IChatBaseComponent$ChatSerializer_a.invoke(null, "{\"text\":\"" + reColor(text) + "\"}");
+        Constructor<?> constructor = aClass_PacketPlayOutChat.getConstructor(aClass_IChatBaseComponent, aClass_ChatMessageType);
+        Object enum_GAME_INFO = aClass_ChatMessageType.getEnumConstants()[2];
+        Object packet = constructor.newInstance(object_msg, enum_GAME_INFO);
+        Method aMethod_getHandle = aClass_CraftPlayer.getDeclaredMethod("getHandle");
+        Object o_EntityPlayer = aMethod_getHandle.invoke(sender);
+        Field f_playerConnection = aClass_EntityPlayer.getField("playerConnection");
+        Method m_sendPacket = aClass_PlayerConnection.getDeclaredMethod("sendPacket", aClass_Packet);
+        Object o_playerConnection = f_playerConnection.get(o_EntityPlayer);
+        getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> {
+            try {
+                m_sendPacket.invoke(o_playerConnection,packet);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }, delay);
+    }
+
     public static String reColor(String text) {
         return ChatColor.translateAlternateColorCodes('&',text);
     }

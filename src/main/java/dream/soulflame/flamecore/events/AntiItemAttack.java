@@ -27,7 +27,8 @@ public class AntiItemAttack implements Listener {
         boolean cantAttack = false;
         for (String item : itemList) {
             String[] split = item.split("<->");
-            if (split[0].equalsIgnoreCase("lore")) {
+            if (split.length < 2) continue;
+            if ("lore".equalsIgnoreCase(split[0])) {
                 if (!itemMeta.hasLore()) continue;
                 List<String> lores = itemMeta.getLore();
                 for (String lore : lores) {
@@ -35,13 +36,13 @@ public class AntiItemAttack implements Listener {
                     if (!line.contains(split[1])) continue;
                     cantAttack = true;
                 }
-            } else if (split[0].equalsIgnoreCase("name")) {
+            } else if ("name".equalsIgnoreCase(split[0])) {
                 if (!itemMeta.hasDisplayName()) continue;
                 String displayName = itemMeta.getDisplayName();
                 String name = SendUtil.stripColor(displayName);
                 if (!name.contains(split[1])) continue;
                 cantAttack = true;
-            } else if (split[0].equalsIgnoreCase("material")) {
+            } else if ("material".equalsIgnoreCase(split[0])) {
                 String material = itemInMainHand.getType().toString();
                 if (!material.contains(split[1])) continue;
                 cantAttack = true;
