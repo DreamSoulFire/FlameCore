@@ -67,13 +67,13 @@ public class SendUtil {
         Object enum_GAME_INFO = aClass_ChatMessageType.getEnumConstants()[2];
         Object packet = constructor.newInstance(object_msg, enum_GAME_INFO);
         Method aMethod_getHandle = aClass_CraftPlayer.getDeclaredMethod("getHandle");
-        Object o_EntityPlayer = aMethod_getHandle.invoke(sender);
-        Field f_playerConnection = aClass_EntityPlayer.getField("playerConnection");
-        Method m_sendPacket = aClass_PlayerConnection.getDeclaredMethod("sendPacket", aClass_Packet);
-        Object o_playerConnection = f_playerConnection.get(o_EntityPlayer);
+        Object object_EntityPlayer = aMethod_getHandle.invoke(sender);
+        Field field_playerConnection = aClass_EntityPlayer.getField("playerConnection");
+        Method aMethod_sendPacket = aClass_PlayerConnection.getDeclaredMethod("sendPacket", aClass_Packet);
+        Object object_playerConnection = field_playerConnection.get(object_EntityPlayer);
         getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> {
             try {
-                m_sendPacket.invoke(o_playerConnection,packet);
+                aMethod_sendPacket.invoke(object_playerConnection,packet);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
@@ -83,6 +83,7 @@ public class SendUtil {
     public static String reColor(String text) {
         return ChatColor.translateAlternateColorCodes('&',text);
     }
+
     public static List<String> reColor(List<String> text) {
         List<String> list = new ArrayList<>();
         for (String texts : text)
