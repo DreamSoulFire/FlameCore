@@ -1,7 +1,8 @@
 package dream.soulflame.flamecore.events;
 
-import dream.soulflame.flamecore.FlameCore;
+import dream.soulflame.flamecore.fileloader.AFELoader;
 import dream.soulflame.flamecore.utils.SendUtil;
+import dream.soulflame.flamecore.utils.SpecialUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -10,11 +11,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class AntiFire implements Listener {
+public class AntiFireEntity implements Listener {
 
     @EventHandler
     public static void entityFire(EntityCombustEvent e) {
-        for (String antis : FlameCore.getPlugin().getConfig().getStringList("AntiFire.List")) {
+        if (!AFELoader.afeEnable) return;
+        for (String antis : AFELoader.getAfeFileUtil().getStringList("Entities")) {
             String[] split = antis.split("<->");
             if ("name".equalsIgnoreCase(split[0])) {
                 if (split.length < 2) continue;
@@ -32,12 +34,13 @@ public class AntiFire implements Listener {
 
     @EventHandler
     public static void entityDamage(EntityDamageByEntityEvent e) {
-        if (!FlameCore.getPlugin().getConfig().getBoolean("AntiFire.Debug", false)) return;
+        if (!AFELoader.afeEnable || !AFELoader.getAfeFileUtil().getBoolean("Debug", false)) return;
         Entity damager = e.getDamager();
         EntityType type = damager.getType();
         if (!type.equals(EntityType.PLAYER)) return;
         Player player = (Player) damager;
-        SendUtil.message(player, "你攻击的实体是: " + e.getEntityType().toString(), 0);
+        for (String info : AFELoader.getAfeFileUtil().getStringList("Message.DebugInfo"))
+            SpecialUtil.actions(player, info.replace("<entity>", e.getEntityType().toString()));
     }
 
 }

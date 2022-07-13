@@ -1,0 +1,95 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#Lore设置
+Lore:
+  #是否启用 [true 是|false 否]
+  Enable: true
+  #当物品上有下列lore时禁止丢弃 [不需要颜色字符]
+  #一行一个
+  List:
+    - '不可丢弃'
+#Name设置
+Name:
+  Enable: true
+  #当物品包含下列名字时禁止丢弃 [不需要颜色字符]
+  List:
+    - '昂贵的金苹果'
+#材质设置
+Texture:
+  Enable: true
+  #物品英文材质 [高版本用这个]
+  Material:
+    Enable: true
+    #以下物品禁止丢弃
+    List:
+      - 'EYE_OF_ENDER'
+  #物品数字id [低版本用这个]
+  Id:
+    Enable: true
+    List:
+      - '381'
+#世界设置
+World:
+  Enable: false
+  #当玩家处于以下世界是禁止丢弃
+  List:
+    - 'world'
+#物品防丢弃模式
+#开启后玩家丢弃物品则需要输入
+# antidropplus toggle
+#来切换为丢弃模式
+ToggleDropMode:
+  #是否启用 [true 是|false 否]
+  Enable: false
+  #延迟关闭丢弃模式
+  Delay:
+    Enable: false
+    #时间 [20=1s]
+    Time: 120
+    #自动关闭丢弃模式时发送消息
+    Notice:
+      Enable: false
+  #需要的权限
+  Permission: 'antidropplus.toggle'
+
+#越过设置
+Skip:
+  #权限设置
+  Permission:
+    #是否启用 [true 是|false 否]
+    Enable: true
+    #拥有此权限的玩家可以无视lore的限制
+    Lore: 'antidropplus.skip.lore'
+    #拥有此权限的玩家可以无视name的限制
+    Name: 'antidropplus.skip.name'
+    #拥有此权限的玩家可以无视material的限制
+    Texture: 'antidropplus.skip.material'
+    #拥有此权限的玩家可以无视world的限制
+    World: 'antidropplus.skip.world'
+
+#消息设置
+Message:
+  #默认状态下发送的信息
+  Normal:
+    - '[message]&c你不能丢弃这个物品'
+  #禁止丢弃的世界
+  World:
+    - '[message]&c这个世界禁止丢弃'
+  #若ToggleDropMode开启
+  #将会自动生效
+  #不开启时无视即可
+  #未切换为丢弃模式时发送的消息
+  ToggleMode:
+    - '[message]&c你现在无法丢弃物品'
+    - '[message]&c请使用 &e/antidropplus toggle'
+    - '[message]&c进入丢弃模式'
+  #自动关闭丢弃模式时发送的信息
+  AutoClose:
+    - '[message]&a自动关闭丢弃模式'
+  OpenToggle:
+    - '[message]&a你开启了丢弃模式,可以丢弃物品了'
+  CloseToggle:
+    - '[message]&c你关闭了丢弃模式,不能丢弃物品了'

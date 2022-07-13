@@ -1,14 +1,15 @@
 package dream.soulflame.flamecore;
 
 import dream.soulflame.flamecore.commands.MainCommand;
-import dream.soulflame.flamecore.events.AntiFallingDamage;
-import dream.soulflame.flamecore.events.AntiFire;
-import dream.soulflame.flamecore.events.AntiItemAttack;
-import dream.soulflame.flamecore.events.AntiSpeedJoin;
+import dream.soulflame.flamecore.events.*;
+import dream.soulflame.flamecore.events.ItemEquipChance.EquipEvent;
+import dream.soulflame.flamecore.events.ItemEquipChance.IdentifierEvent;
+import dream.soulflame.flamecore.fileloader.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static dream.soulflame.flamecore.utils.SendUtil.message;
 import static dream.soulflame.flamecore.utils.SendUtil.reColor;
 import static org.bukkit.Bukkit.*;
 
@@ -36,32 +37,54 @@ public final class FlameCore extends JavaPlugin {
                 "&b开始&a加载&3配置文件",
                 ""
         };
-        for (String start : startMsg) getConsoleSender().sendMessage(reColor(start));
+        message(startMsg);
+
         plugin = this;
         getPluginCommand("flamecore").setExecutor(new MainCommand());
         getPluginCommand("flamecore").setTabCompleter(new MainCommand());
 
         saveDefaultConfig();
+        ADLoader.reload();
+        AFDLoader.reload();
+        AFELoader.reload();
+        AIALoader.reload();
+        ASJLoader.reload();
+        IECLoader.reload();
+        RCGLoader.reload();
+        SFLoader.reload();
+        SICLoader.reload();
+        TILoader.reload();
         String[] loadPlugin = {
                 "&b配置文件&b加载&a成功",
                 "",
         };
-        for (String load : loadPlugin) getConsoleSender().sendMessage(reColor(load));
+        message(loadPlugin);
 
-        if (getConfig().getBoolean("AntiItemAttack.Enable", false))
-            getPluginManager().registerEvents(new AntiItemAttack(), this);
-        if (getConfig().getBoolean("AntiFalling.Enable", false))
+        if (ADLoader.adEnable)
+            getPluginManager().registerEvents(new AntiDrop(), this);
+        if (AFDLoader.afdEnable)
             getPluginManager().registerEvents(new AntiFallingDamage(), this);
-        if (getConfig().getBoolean("AntiFire.Enable", false))
-            getPluginManager().registerEvents(new AntiFire(), this);
-        if (getConfig().getBoolean("AntiSpeedJoin.Enable", false))
+        if (AFELoader.afeEnable)
+            getPluginManager().registerEvents(new AntiFireEntity(), this);
+        if (AIALoader.aiaEnable)
+            getPluginManager().registerEvents(new AntiItemAttack(), this);
+        if (ASJLoader.asjEnable)
             getPluginManager().registerEvents(new AntiSpeedJoin(), this);
+        if (IECLoader.iecEnable) {
+            getPluginManager().registerEvents(new EquipEvent(), this);
+            if (!getPluginManager().isPluginEnabled("DragonCore")) return;
+            getPluginManager().registerEvents(new IdentifierEvent(), this);
+        }
+        if (SICLoader.sicEnable)
+            getPluginManager().registerEvents(new SwapItemCooldown(), this);
+        if (TILoader.tiEnable)
+            getPluginManager().registerEvents(new TabInfo(), this);
 
         String[] finishMsg = {
                 "&a加载&b完成 &6插件&e开始&3运行",
                 splitLine
         };
-        for (String finish : finishMsg) getConsoleSender().sendMessage(reColor(finish));
+        message(finishMsg);
     }
 
     @Override
@@ -74,7 +97,7 @@ public final class FlameCore extends JavaPlugin {
                 "&e感谢使用本插件",
                 splitLine
         };
-        for (String close : closeMsg) getConsoleSender().sendMessage(reColor(close));
+        message(closeMsg);
         if (!getConfig().getBoolean("KickPlayer.Enable" ,false)) return;
         String kickMsg = getConfig().getString("KickMsg", "");
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) onlinePlayer.kickPlayer(reColor(kickMsg));

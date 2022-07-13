@@ -1,0 +1,47 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#具体的指令
+#可无限增加
+CommandGroup:
+  #指令组id
+  #例子
+  Example:
+    #几率
+    Chance: 50
+    #权限
+    Permission: 'randomcommandgroup.run.example'
+    #执行的指令
+    # op 以op身份运行
+    # console 以控制台身份运行
+    # player 以玩家身份运行
+    #可以使用延时
+    #例子:
+    #[op]heal <player>:20
+    # 20 代表着延时 1s
+    Commands:
+      - '[op]heal <player>'
+    #成功时发送的信息 [不要可以直接删掉]
+    #消息设置与 FlameCore 一致
+    Success:
+      - ''
+    #失败时发送的信息 其余同上
+    Fail:
+      - ''
+
+#特殊设置
+Special:
+  Enable: false
+  #检测列表
+  #格式
+  #检测模式 词条 几率
+  #模式有
+  # permission 权限
+  # name 物品名字
+  # lore 物品lore
+  List:
+    - 'permission<->rcg.special.VIP<->3'
+    - 'name<->VIP专用道具<->1'
+    - 'lore<->很牛逼的东西<->3'

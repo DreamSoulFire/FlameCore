@@ -27,6 +27,12 @@ public class SendUtil {
     public static void message(CommandSender sender, String text) {
         sender.sendMessage(reColor(reName(sender, text)));
     }
+    public static void message(String[] texts) {
+        for (String text : texts) Bukkit.getConsoleSender().sendMessage(reColor(text));
+    }
+    public static void message(List<String> texts) {
+        for (String text : texts) Bukkit.getConsoleSender().sendMessage(reColor(text));
+    }
     public static void message(String text) {
         Bukkit.getConsoleSender().sendMessage(reColor(text));
     }
@@ -73,7 +79,7 @@ public class SendUtil {
         Object object_playerConnection = field_playerConnection.get(object_EntityPlayer);
         getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> {
             try {
-                aMethod_sendPacket.invoke(object_playerConnection,packet);
+                aMethod_sendPacket.invoke(object_playerConnection, packet);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }

@@ -1,6 +1,6 @@
 package dream.soulflame.flamecore.events;
 
-import dream.soulflame.flamecore.FlameCore;
+import dream.soulflame.flamecore.fileloader.AIALoader;
 import dream.soulflame.flamecore.utils.SendUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -17,13 +17,14 @@ public class AntiItemAttack implements Listener {
 
     @EventHandler
     public static void itemAttack(EntityDamageByEntityEvent e) {
+        if (!AIALoader.aiaEnable) return;
         Entity damager = e.getDamager();
         if (!(damager instanceof Player)) return;
         Player player = (Player) damager;
         ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand == null || itemInMainHand.getType().equals(Material.AIR)) return;
         ItemMeta itemMeta = itemInMainHand.getItemMeta();
-        List<String> itemList = FlameCore.getPlugin().getConfig().getStringList("AntiItemAttack.List");
+        List<String> itemList = AIALoader.getAiaFileUtil().getStringList("CheckList");
         boolean cantAttack = false;
         for (String item : itemList) {
             String[] split = item.split("<->");

@@ -57,5 +57,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="spigot-1.12.2" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../插件开发用/DragonCore-2.5.6.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -1,53 +1,13 @@
-#设置所有 Flame 系列插件的前缀
-Prefix: '&7[&b系统&7]'
-
-#禁止武器攻击
-AntiItemAttack:
-  #是否启用 [true 是|false 否]
-  Enable: false
-  #检测的物品列表
-  # 三种检测
-  # lore lore词条
-  # name 物品名称
-  # material 物品英文材质
-  #只要包含<->后的文字就无法攻击
-  List:
-    - 'lore<->已经不能使用了'
-    - 'name<->残破大剑'
-    - 'material<->SWORD'
-
-#禁止摔落伤害
-AntiFalling:
-  Enable: false
-
-#禁止生物燃烧
-AntiFire:
-  Enable: false
-  #两种检测
-  # name 检测生物名称[包含即可]
-  # entity 检测原版生物名
-  List:
-    - 'name<->超级boss'
-    - 'entity<->ZOMBIE'
-  #打开后每次攻击生物
-  #将会输出对应的原版生物名
-  Debug: false
-
-#禁止过快加入服务器
-AntiSpeedJoin:
-  #是否启用 [true 是|false 否]
-  Enable: true
-  #禁止玩家进入服务器的时间
-  AntiTime: 10
-  #提出玩家发送的信息
-  AntiTimeMsg: '&c请等待 <time> 秒后再进入服务器'
-
 #插件关闭时踢出所有玩家
 KickPlayer:
+  #是否启用 [true 是|false 否]
   Enable: true
   #发送的信息
   Msg: '&b服务器&c关闭 &a您已被&6踢出&b服务器'
 
+#设置所有 Flame 系列插件的前缀
+Prefix: '&7[&b系统&7]'
+#指令
 #支持的消息模式列表
 #[message] 发送私人消息
 #格式 [message]要发送的信息
@@ -68,15 +28,55 @@ KickPlayer:
 #格式 [bossbar]标题[文字]-颜色-样式
 #冒号后面跟的是延迟执行的时间 不填默认 0
 # [message]&c你没有权利这么做:30
-#帮助命令
-Help:
-  - '&7| &6Flame&eCore &7| &e插件帮助'
-  - '&f/flamecore help &a插件主命令'
-  - '&f/flamecore reload &a重载插件'
-  - '&4PS&f: &e所有的 &bflamecore &e都可用 &afc &e来代替'
-#没有权限时发送的消息
-NoPermission:
-  - '[message]&c你没有权利这么做'
-#重载插件时发送的消息
-Reload:
-  - '[message]&a插件重载成功'
+Command:
+  #帮助命令[此处无法使用其他的消息模式]
+  #除主命令与提示命令外,其他指令的显示需要打开对应模块
+  Help:
+    #主命令
+    Main:
+      - '&7| &6Flame&eCore &7| &e插件帮助'
+      - '&f/flamecore help &a插件主命令'
+      - '&f/flamecore reload &a重载插件'
+      - '&7[&6会同时&a重载 &bmodules &e文件夹&6下的所有&9模块&7]'
+    #[AntiDrop-禁止丢弃]模块命令
+    AntiDrop:
+      - '&f/flamecore toggle [玩家] &a为指定玩家切换丢弃模式'
+    #[SlotFunctions-龙核槽位功能]模块命令
+    SlotFunctions:
+      - '&f/flamecore get [玩家] [槽位] &a获取指定玩家的槽位并移除物品'
+      - '&f/flamecore set [玩家] [槽位] &a将手上的物品设置到指定玩家的槽位'
+      - '&f/flamecore change [玩家] [槽位1] [槽位2] &a将指定玩家槽位1的物品与槽位2的物品交换'
+    #[RandomCommandGroup-随机指令组]模块命令
+    RandomCommandGroup:
+      - '&f/flamecore run [玩家] [指令组id] &a为指定玩家运行一个指令组'
+    #提示命令
+    Tips:
+      - ''
+      - '&4PS&f: &e所有的 &bflamecore &e都可用 &afc &e来代替'
+      - '&a[玩家] &e不填 &e默认为&7指令使用者'
+  #没有权限时发送的消息
+  NoPermission:
+    - '[message]&c你没有权利这么做'
+  #重载插件时发送的消息
+  Reload:
+    - '[message]&a插件重载成功'
+  #后台无法使用一些指令的消息
+  CantConsole:
+    - '[message]&c后台不可执行此命令'
+  #参数错误时的消息
+  ArgsNoEnough:
+    - '[message]&c指令参数错误,请检查是否输错了指令'
+  #玩家离线时发送的消息
+  PlayerOffline:
+    - '[message]&c该玩家离线,无法执行此操作'
+  #插件错误时发送的消息
+  Error:
+    - '[message]&c插件出现错误,请自己排查问题'
+  #检查物品时发送的消息
+  CheckItem:
+    #手上没有物品
+    NoItem:
+      - '[message]&c你手上没有物品'
+    #物品的正确id
+    CorrectTexture:
+      - '[message]&d你手里物品的&a正确&b<mode>&d是 &3<texture>'

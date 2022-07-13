@@ -1,0 +1,12 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#禁止玩家进入服务器的时间
+AntiTime: 10
+
+#语言设置
+Message:
+  #提出玩家发送的信息
+  AntiTime: '&c请等待 <time> 秒后再进入服务器'

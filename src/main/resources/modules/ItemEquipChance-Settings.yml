@@ -1,0 +1,39 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#检查物品上的lore [不需要颜色字符]
+CheckLore:
+  EquipChance: '装备几率'
+  AddChance: '增加成功率'
+  ReduceChance: '减少成功率'
+  SaveItem: '装备失败后可保留物品'
+#龙核槽位设置
+Identifier:
+  - '额外槽位1'
+#根据物品名字直接设置几率
+NameChance:
+  #是否启用
+  Enable: false
+  #分割字符
+  Split: ':'
+  #列表 [不需要颜色字符]
+  #格式 物品名 分隔符 几率
+  #注意
+  #物品名使用模糊检测
+  #且物品会受lore影响
+  List:
+    - '牛批的道具:50'
+
+#语言设置
+Message:
+  #装备成功发送的信息
+  EquipSuccess:
+    - '[message]&a装备成功,玩家的实力又更上一层楼'
+  #装备失败发送的信息
+  EquipFail:
+    - '[message]&c装备失败,物品已被销毁'
+  #装备保留发送的信息
+  EquipSave:
+    - '[message]&a已保留物品,保留道具已扣除'

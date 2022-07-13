@@ -1,0 +1,31 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+#龙核头顶消息设置 [可自由增加]
+PlayerInfo:
+  Level:
+    #X轴偏移
+    X: 0
+    #Y轴偏移
+    Y: 2
+    #Z轴偏移
+    Z: 0
+    #忘了
+    Pitch: 0
+    #朝向
+    Yaw: 0
+    #大小
+    Size: 0.2
+    #文本 [支持变量]
+    Text: '&a等级 &b%player_level%'
+  Name:
+    X: 0
+    Y: 2.2
+    Z: 0
+    Pitch: 0
+    Yaw: 0
+    Size: 0.2
+    Text: '&f牛逼&e克拉斯 &b%player_name%'
+#是否让玩家能看见自己头顶的信息
+ShowSelf: false

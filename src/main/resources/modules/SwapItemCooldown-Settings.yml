@@ -1,0 +1,44 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: true
+
+#分隔字符
+SplitChar: ':'
+#检测设置 [若都开启则两种检测都需要满足]
+Setting:
+  #检测名字
+  Name:
+    Enable: true
+    #名字列表
+    #格式 物品名 分隔字符 数值
+    CheckList:
+      - '超级快的武器:0.5'
+  #检测lore
+  Lore:
+    Enable: false
+    #使物品进入切换冷却的lore
+    #这里取决于你物品lore后面跟的数值
+    Check: '切换冷却'
+#特殊权限设置
+Permission:
+  Enable: false
+  #权限列表
+  #格式 权限名 分隔字符 要减少的数值
+  List:
+    - 'swapitemcooldown.normal:0.1'
+#分离权限设置
+#分离: 切换冷却仅对特殊物品生效
+#不然只要切换到物品 无论再次切换的物品
+#是否有切换冷却 都会保持在冷却状态
+Resolve:
+  Permission:
+    Enable: false
+    List:
+      - 'swapitemcooldown.vip'
+
+#消息设置
+Message:
+  #玩家在切换物品间隔时发送的消息
+  InCooldown:
+    - '[message]&7你正处于切换间隔'

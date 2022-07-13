@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FlameCore-1.1.0">
+    <output-path>$USER_HOME$/Desktop/测试服务端/1.12.2/plugins</output-path>
+    <root id="archive" name="FlameCore-1.1.0.jar">
+      <element id="module-output" name="FlameCore" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
