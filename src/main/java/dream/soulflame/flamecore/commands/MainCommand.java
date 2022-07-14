@@ -45,18 +45,27 @@ public class MainCommand implements TabExecutor {
             getPluginManager().registerEvents(new AntiDrop(), getPlugin());
             ADLoader.reload();
         }
-        if (afdEnable)
+        if (afdEnable) {
             getPluginManager().registerEvents(new AntiFallingDamage(), getPlugin());
-        if (afeEnable)
+            AFDLoader.reload();
+        }
+        if (afeEnable) {
             getPluginManager().registerEvents(new AntiFireEntity(), getPlugin());
-        if (aiaEnable)
+            AFELoader.reload();
+        }
+        if (aiaEnable) {
             getPluginManager().registerEvents(new AntiItemAttack(), getPlugin());
-        if (asjEnable)
+            AIALoader.reload();
+        }
+        if (asjEnable) {
             getPluginManager().registerEvents(new AntiSpeedJoin(), getPlugin());
+            ASJLoader.reload();
+        }
         if (iecEnable) {
             getPluginManager().registerEvents(new EquipEvent(), getPlugin());
-            if (!getPluginManager().isPluginEnabled("DragonCore")) return;
-            getPluginManager().registerEvents(new IdentifierEvent(), getPlugin());
+            if (getPluginManager().isPluginEnabled("DragonCore"))
+                getPluginManager().registerEvents(new IdentifierEvent(), getPlugin());
+            IECLoader.reload();
         }
         if (rcgEnable) RCGLoader.reload();
         if (sfEnable) SFLoader.reload();
@@ -64,8 +73,11 @@ public class MainCommand implements TabExecutor {
             getPluginManager().registerEvents(new SwapItemCooldown(), getPlugin());
             SICLoader.reload();
         }
-        if (tiEnable)
+        if (tiEnable) {
             getPluginManager().registerEvents(new TabInfo(), getPlugin());
+            TabInfo.reload();
+            TILoader.reload();
+        }
     }
 
     @Override
