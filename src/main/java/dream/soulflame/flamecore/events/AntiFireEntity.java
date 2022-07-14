@@ -1,7 +1,6 @@
 package dream.soulflame.flamecore.events;
 
 import dream.soulflame.flamecore.fileloader.AFELoader;
-import dream.soulflame.flamecore.utils.SendUtil;
 import dream.soulflame.flamecore.utils.SpecialUtil;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -36,8 +35,7 @@ public class AntiFireEntity implements Listener {
     public static void entityDamage(EntityDamageByEntityEvent e) {
         if (!AFELoader.afeEnable || !AFELoader.getAfeFileUtil().getBoolean("Debug", false)) return;
         Entity damager = e.getDamager();
-        EntityType type = damager.getType();
-        if (!type.equals(EntityType.PLAYER)) return;
+        if (!(damager instanceof Player)) return;
         Player player = (Player) damager;
         for (String info : AFELoader.getAfeFileUtil().getStringList("Message.DebugInfo"))
             SpecialUtil.actions(player, info.replace("<entity>", e.getEntityType().toString()));
