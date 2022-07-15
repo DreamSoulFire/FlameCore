@@ -62,8 +62,8 @@ public class EquipEvent implements Listener {
                         if (_meta == null) continue;
                         if (!_meta.hasDisplayName()) continue;
                         String displayName = _meta.getDisplayName();
-                        String stripColorName = stripColor(displayName);
-                        if (stripColorName.contains(split[0])) pro = Double.parseDouble(split[1]);
+                        displayName = stripColor(displayName);
+                        if (displayName.contains(split[0])) pro = Double.parseDouble(split[1]);
                     }
                 }
             for (ItemStack _item : inventory) {
@@ -73,14 +73,14 @@ public class EquipEvent implements Listener {
                 ItemMeta _itemMeta = _item.getItemMeta();
                 if (_itemMeta == null) continue;
                 if (!_itemMeta.hasLore()) continue;
-                List<String> _Lore = _itemMeta.getLore();
-                for (String _loreList : _Lore) {
-                    String stripColorLore = stripColor(_loreList);
-                    boolean containsAddChance = stripColorLore.contains(checkAddChance);
-                    boolean containsReduceChance = stripColorLore.contains(checkReduceChance);
+                List<String> _lores = _itemMeta.getLore();
+                for (String _lore : _lores) {
+                    _lore = stripColor(_lore);
+                    boolean containsAddChance = _lore.contains(checkAddChance);
+                    boolean containsReduceChance = _lore.contains(checkReduceChance);
                     if (!containsAddChance && !containsReduceChance) continue;
-                    pro += getLoreDouble(_Lore, checkAddChance);
-                    pro -= getLoreDouble(_Lore, checkReduceChance);
+                    pro += getLoreDouble(_lores, checkAddChance);
+                    pro -= getLoreDouble(_lores, checkReduceChance);
                     int _amount = _item.getAmount();
                     _item.setAmount(_amount - 1);
                 }

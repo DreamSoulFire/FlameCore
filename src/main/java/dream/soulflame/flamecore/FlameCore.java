@@ -49,6 +49,7 @@ public final class FlameCore extends JavaPlugin {
         AFELoader.reload();
         AIALoader.reload();
         ASJLoader.reload();
+        IDLoader.reload();
         IECLoader.reload();
         RCGLoader.reload();
         SFLoader.reload();
@@ -70,6 +71,8 @@ public final class FlameCore extends JavaPlugin {
             getPluginManager().registerEvents(new AntiItemAttack(), this);
         if (ASJLoader.asjEnable)
             getPluginManager().registerEvents(new AntiSpeedJoin(), this);
+        if (IDLoader.idEnable)
+            getPluginManager().registerEvents(new ItemDurability(), this);
         if (IECLoader.iecEnable) {
             getPluginManager().registerEvents(new EquipEvent(), this);
             if (!getPluginManager().isPluginEnabled("DragonCore")) return;

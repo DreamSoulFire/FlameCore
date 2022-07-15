@@ -61,6 +61,10 @@ public class MainCommand implements TabExecutor {
             getPluginManager().registerEvents(new AntiSpeedJoin(), getPlugin());
             ASJLoader.reload();
         }
+        if (IDLoader.idEnable) {
+            getPluginManager().registerEvents(new ItemDurability(), getPlugin());
+            IDLoader.reload();
+        }
         if (iecEnable) {
             getPluginManager().registerEvents(new EquipEvent(), getPlugin());
             if (getPluginManager().isPluginEnabled("DragonCore"))

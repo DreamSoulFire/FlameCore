@@ -1,0 +1,31 @@
+#模块启用设置
+Module:
+  #是否启用 [true 是|false 否]
+  Enable: false
+
+#检测的lore
+CheckLore: '耐久'
+#耐久分隔符
+Split: '/'
+#如果是默认配置下
+#给武器的lore应该是
+#耐久 10/10
+#要上颜色要这样上
+#&7耐久&a 10/10
+#耐久和数值中间必须有一个空格
+#不然会提示格式错误
+
+#耐久到达多少之后提示耐久不足
+Notice: 5
+
+#语言设置
+Message:
+  #耐久格式错误时发送
+  LoreError:
+    - '[message]&c耐久格式错误,此物品无法使用'
+  #清除物品时发送
+  ClearItem:
+    - '[message]&c此物品耐久耗尽,已销毁'
+  #物品耐久快耗尽时发送
+  SoonCantUse:
+    - '[message]&c请注意,此物品只有 &a<value> &c点耐久,耐久耗尽武器将直接销毁'

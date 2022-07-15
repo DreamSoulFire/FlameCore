@@ -77,6 +77,10 @@ public class SpecialUtil {
             if (condition.startsWith(papi)) {
                 String[] papiStr = condition.split(splitChar);
                 String prePapi;
+                if (papiStr.length < 2) {
+                    actions(player, configError);
+                    return false;
+                }
                 if (papiStr[1].contains(gt) && !papiStr[1].contains(eq)) {
                     split = papiStr[1].split(gt);
                     prePapi = PlaceholderAPI.setPlaceholders(player, split[0]);
@@ -102,14 +106,14 @@ public class SpecialUtil {
                     prePapi = PlaceholderAPI.setPlaceholders(player, split[0]);
                     return Double.parseDouble(prePapi) != Double.parseDouble(split[1]);
                 } else {
-                    for (String error : configError) actions(player, error);
+                    actions(player, configError);
                     return false;
                 }
             } else if (condition.startsWith(perm)) {
                 split = condition.split(splitChar);
                 return player.hasPermission(split[1]);
             } else {
-                for (String error : configError) actions(player, error);
+                actions(player, configError);
                 return false;
             }
         }
