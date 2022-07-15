@@ -27,6 +27,8 @@ public final class FlameCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new Metrics(plugin, 15780);
+
         start = System.currentTimeMillis();
 
         String[] startMsg = {
